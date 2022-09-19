@@ -1,5 +1,5 @@
 const Buffer = require('buffer').Buffer;
-const torrentParser = require('./torrent-parser');
+const torrentParser = require('./torrentParser');
 const util = require('./util');
 
 module.exports.buildHandshake = torrent => {
@@ -9,7 +9,7 @@ module.exports.buildHandshake = torrent => {
   // pstr
   buf.write('BitTorrent protocol', 1);
   // reserved
-  buf.writeBigUInt64BE(0, 20);
+  buf.writeBigUInt64BE(0n, 20);
   // info hash
   torrentParser.infoHash(torrent).copy(buf, 28);
   // peer id

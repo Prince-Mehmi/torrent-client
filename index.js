@@ -1,10 +1,6 @@
-const fs = require('fs');
-const bencode = require('bencode');
-const tracker = require('./src/tracker');
+const download = require('./src/download');
+const torrentParser = require('./src/torrentParser');
 
-// provide path to torrent file
-const torrent = bencode.decode(fs.readFileSync('Father Stu.torrent'));
+const torrent = torrentParser.open("Father Stu.torrent");
 
-tracker.getPeers(torrent, peers => {
-  console.log('list of peers: ', peers);
-});
+download(torrent, torrent.info.name);

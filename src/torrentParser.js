@@ -22,11 +22,11 @@ module.exports.size = (torrent) => {
 };
 
 module.exports.pieceLen = (torrent, pieceIndex) => {
-  const totalLength = bignum.fromBuffer(this.size(torrent)).toNumber();
+  const totalLength = this.size(torrent);
   const pieceLength = torrent.info["piece length"];
 
-  const lastPieceLength = totalLength % pieceLength;
-  const lastPieceIndex = Math.floor(totalLength / pieceLength);
+  const lastPieceLength = totalLength % BigInt(pieceLength);
+  const lastPieceIndex = totalLength / BigInt(pieceLength);
 
   return lastPieceIndex === pieceIndex ? lastPieceLength : pieceLength;
 };
